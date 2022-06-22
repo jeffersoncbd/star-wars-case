@@ -5,5 +5,22 @@
   "author": {
     "name": "Jefferson Carlos",
     "email": "jeff.carlosbd@gmail.com"
+  },
+  "scripts": {
+    "dev": "ts-node src/application.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
   }
 }
