@@ -10,9 +10,11 @@
     "dev": "ts-node src/application.ts"
   },
   "dependencies": {
+    "@opensearch-project/opensearch": "^2.0.0",
     "dotenv": "^16.0.1"
   },
   "devDependencies": {
+    "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "eslint": "^8.0.1",
