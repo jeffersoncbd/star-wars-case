@@ -3,7 +3,7 @@ export interface UnknownObject {
 }
 
 export interface ApiService {
-  get(endpoint: string): Promise<UnknownObject[]>
+  get(endpoint: string): Promise<UnknownObject[] | UnknownObject>
 }
 
 export interface IndexerService {
