@@ -7,7 +7,7 @@ export interface IndexationSettings {
   properties: string[]
 }
 
-export class MapAndIndexAnObject {
+export class IndexAnUnknownObject {
   constructor(private mapper: MapTheObject, private indexer: IndexerService) {}
 
   async index(object: UnknownObject, settings: IndexationSettings) {
