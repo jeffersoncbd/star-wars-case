@@ -3,7 +3,7 @@ export default {
   clearMocks: true,
 
   collectCoverage: false,
-  // collectCoverageFrom: undefined,
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/**/index.ts'],
   coverageDirectory: '__tests__/coverage',
   coverageProvider: 'v8',
 

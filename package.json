@@ -16,7 +16,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "jest --bail --findRelatedTests -c jest.unitary.config.ts"
+      "jest --bail --passWithNoTests --findRelatedTests -c jest.unitary.config.ts"
     ]
   },
   "dependencies": {
