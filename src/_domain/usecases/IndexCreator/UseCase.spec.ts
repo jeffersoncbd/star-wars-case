@@ -37,7 +37,7 @@ describe(IndiceCreatorUsecase.name, () => {
     jest.spyOn(checkerStub, 'check').mockImplementation(async () => true)
     await expect(sut.create(fakeData)).rejects.toThrow(ValidationError)
     await expect(sut.create(fakeData)).rejects.toThrow(
-      'O indice anyIndex já existe no contexto any'
+      'O indice "anyIndex" já existe no contexto "any"'
     )
   })
 

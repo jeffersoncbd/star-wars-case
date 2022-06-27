@@ -20,7 +20,7 @@ export class IndiceCreatorUsecase {
     const indexExists = await this.checker.check(`${context}-${index}`)
     if (indexExists) {
       throw new ValidationError(
-        `O indice ${index} já existe no contexto ${context}.`
+        `O indice "${index}" já existe no contexto "${context}".`
       )
     }
     await this.creator.create(`${context}-${index}`)
