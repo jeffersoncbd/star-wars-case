@@ -9,6 +9,6 @@ export class ControllerToIndexAnEndpoint implements Controller {
       params: { context },
       body: { endpoint, index, properties }
     } = httpRequest
-    this.indexer.index(endpoint, { context, index, properties })
+    await this.indexer.index(endpoint, { context, index, properties })
   }
 }
