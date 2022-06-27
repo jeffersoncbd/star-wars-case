@@ -6,9 +6,9 @@ export class ControllerToIndexAnEndpoint implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<void | HttpResponse> {
     const {
-      params: { context },
-      body: { endpoint, index, properties }
+      params: { index },
+      body: { endpoint, properties }
     } = httpRequest
-    await this.indexer.index(endpoint, { context, index, properties })
+    await this.indexer.index(endpoint, { index, properties })
   }
 }
