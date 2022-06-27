@@ -1,6 +1,8 @@
 import { ApiService, UnknownObject } from '../../entities/_services'
-import { IndexationSettings } from '../IndexAnUnknownObject'
-import { makeIndexAnUnknownObjectStub } from '../IndexAnUnknownObject/UseCase.spec'
+import {
+  IndexationSettings,
+  makeIndexAnUnknownObjectStub
+} from '../IndexAnUnknownObject'
 import { IndexApiEndpoint } from './UseCase'
 
 class ApiStub implements ApiService {
