@@ -1,0 +1,15 @@
+tasks:
+  - init: yarn install
+    command: yarn dev
+
+vscode:
+  extensions:
+    - sainnhe.gruvbox-material
+    - pkief.material-icon-theme
+    - esbenp.prettier-vscode
+    - jpoissonnier.vscode-styled-components
+    - mikestead.dotenv
+    - dbaeumer.vscode-eslint
+    - naumovs.color-highlight
+    - dracula-theme.theme-dracula
+    - prisma.prisma
