@@ -20,7 +20,6 @@ const fakeSettings = {
   index: 'any',
   properties: ['id', 'name']
 }
-export const makeIndexAnUnknownObjectStub = () => makeSut().sut
 
 describe(IndexAnUnknownObjectUseCase.name, () => {
   test('deve mapear o objeto com as propriedades definidas', async () => {
@@ -41,3 +40,5 @@ describe(IndexAnUnknownObjectUseCase.name, () => {
     )
   })
 })
+
+export const makeIndexAnUnknownObjectStub = () => makeSut().sut
