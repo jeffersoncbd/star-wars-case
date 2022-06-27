@@ -21,6 +21,6 @@ export const errorsHandler: ErrorRequestHandler = (
       .json({ feedback: error.message })
   }
 
-  console.error(new Date(), `\n${error.stack}\n`)
+  console.error('[Express]', new Date(), `\n${error.stack}\n`)
   return response.status(500).json({ feedback: 'Ocorreu um erro inesperado' })
 }

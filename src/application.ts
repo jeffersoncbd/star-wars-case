@@ -5,7 +5,11 @@ import 'express-async-errors'
 import { server } from './services/Express'
 
 async function root() {
-  await server.start()
+  try {
+    await server.start()
+  } catch (error) {
+    console.log('[root]', new Date(), `\n${(error as any).stack}\n`)
+  }
 }
 
 root()
