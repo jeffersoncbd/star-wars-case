@@ -1,5 +1,6 @@
 import { MapTheObject } from '../../entities/MapTheObject'
-import { IndexerService, UnknownObject } from '../../entities/_services'
+import { IndexerService } from '../../entities/_services'
+import { UnknownObject } from '../../entities/_protocols'
 
 export interface IndexationSettings {
   index: string

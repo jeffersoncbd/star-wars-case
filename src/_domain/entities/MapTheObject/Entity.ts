@@ -1,5 +1,5 @@
 import { ValidationError } from '../_errors/Validation'
-import { UnknownObject } from '../_services'
+import { UnknownObject } from '../_protocols'
 
 export class MapTheObject {
   map(object: UnknownObject, properties: string[]) {

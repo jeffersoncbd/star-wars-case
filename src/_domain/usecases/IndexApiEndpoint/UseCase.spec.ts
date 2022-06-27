@@ -1,4 +1,5 @@
-import { ApiService, UnknownObject } from '../../entities/_services'
+import { ApiService } from '../../entities/_services'
+import { UnknownObject } from '../../entities/_protocols'
 import {
   IndexationSettings,
   makeIndexAnUnknownObjectStub
