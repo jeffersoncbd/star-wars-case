@@ -18,7 +18,6 @@ function makeSut() {
   return { sut, apiStub, indexerStub }
 }
 const fakeSettings: IndexationSettings = {
-  context: 'context',
   index: 'index',
   properties: ['any']
 }

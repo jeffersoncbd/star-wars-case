@@ -22,29 +22,28 @@ function makeSut() {
   const sut = new IndiceCreatorUsecase(checkerStub, creatorStub)
   return { sut, checkerStub, creatorStub }
 }
-const fakeData = { context: 'any', index: 'anyIndex' }
 
 describe(IndiceCreatorUsecase.name, () => {
   test('deve validar o indice recebido', async () => {
     const { sut, checkerStub } = makeSut()
     const checkSpy = jest.spyOn(checkerStub, 'check')
-    await sut.create(fakeData)
-    expect(checkSpy).toHaveBeenCalledWith('any-anyIndex')
+    await sut.create('anyIndex')
+    expect(checkSpy).toHaveBeenCalledWith('anyIndex')
   })
 
   test('deve lançar erro de validação caso o indice exista', async () => {
     const { sut, checkerStub } = makeSut()
     jest.spyOn(checkerStub, 'check').mockImplementation(async () => true)
-    await expect(sut.create(fakeData)).rejects.toThrow(ValidationError)
-    await expect(sut.create(fakeData)).rejects.toThrow(
-      'O indice "anyIndex" já existe no contexto "any"'
+    await expect(sut.create('anyIndex')).rejects.toThrow(ValidationError)
+    await expect(sut.create('anyIndex')).rejects.toThrow(
+      'O indice "anyIndex" já existe'
     )
   })
 
   test('deve criar o o indice caso não exista no contexto', async () => {
     const { sut, creatorStub } = makeSut()
     const createSpy = jest.spyOn(creatorStub, 'create')
-    await sut.create(fakeData)
-    expect(createSpy).toHaveBeenCalledWith('any-anyIndex')
+    await sut.create('anyIndex')
+    expect(createSpy).toHaveBeenCalledWith('anyIndex')
   })
 })

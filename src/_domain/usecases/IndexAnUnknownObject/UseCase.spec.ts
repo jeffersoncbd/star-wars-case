@@ -16,7 +16,6 @@ function makeSut() {
 }
 const anyObject = { id: 1, name: 'any', any: 'any' }
 const fakeSettings = {
-  context: 'any',
   index: 'any',
   properties: ['id', 'name']
 }
@@ -29,15 +28,12 @@ describe(IndexAnUnknownObjectUseCase.name, () => {
     expect(mapSpy).toHaveBeenCalledWith(anyObject, fakeSettings.properties)
   })
 
-  test('deve indexar os dados mapeados no contexto e indice definidos', async () => {
+  test('deve indexar os dados mapeados no indice definido', async () => {
     const { sut, mapper, indexerStub } = makeSut()
     jest.spyOn(mapper, 'map').mockReturnValue({ id: 1 })
     const indexSpy = jest.spyOn(indexerStub, 'index')
     await sut.index(anyObject, fakeSettings)
-    expect(indexSpy).toHaveBeenCalledWith(
-      `${fakeSettings.context}-${fakeSettings.index}`,
-      { id: 1 }
-    )
+    expect(indexSpy).toHaveBeenCalledWith(fakeSettings.index, { id: 1 })
   })
 })
 
