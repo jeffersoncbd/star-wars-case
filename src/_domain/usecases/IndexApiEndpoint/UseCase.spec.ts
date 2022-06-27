@@ -4,7 +4,7 @@ import {
   IndexationSettings,
   makeIndexAnUnknownObjectStub
 } from '../IndexAnUnknownObject'
-import { IndexApiEndpoint } from './UseCase'
+import { IndexApiEndpointUseCase } from './UseCase'
 
 class ApiStub implements ApiService {
   async get(): Promise<UnknownObject | UnknownObject[]> {
@@ -16,7 +16,7 @@ function makeSut() {
   const apiStub = new ApiStub()
   const indexerStub = makeIndexAnUnknownObjectStub()
   jest.spyOn(indexerStub, 'index').mockImplementation(async () => undefined)
-  const sut = new IndexApiEndpoint(apiStub, indexerStub)
+  const sut = new IndexApiEndpointUseCase(apiStub, indexerStub)
   return { sut, apiStub, indexerStub }
 }
 const fakeSettings: IndexationSettings = {
@@ -25,7 +25,7 @@ const fakeSettings: IndexationSettings = {
   properties: ['any']
 }
 
-describe(IndexApiEndpoint.name, () => {
+describe(IndexApiEndpointUseCase.name, () => {
   test('deve pegar os dados do endpoint informado', async () => {
     const { sut, apiStub } = makeSut()
     const getSpy = jest.spyOn(apiStub, 'get')

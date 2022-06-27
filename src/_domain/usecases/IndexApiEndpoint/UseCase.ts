@@ -1,11 +1,14 @@
 import { ApiService } from '../../entities/_services'
 import {
-  IndexAnUnknownObject,
+  IndexAnUnknownObjectUseCase,
   IndexationSettings
 } from '../IndexAnUnknownObject'
 
-export class IndexApiEndpoint {
-  constructor(private api: ApiService, private indexer: IndexAnUnknownObject) {}
+export class IndexApiEndpointUseCase {
+  constructor(
+    private api: ApiService,
+    private indexer: IndexAnUnknownObjectUseCase
+  ) {}
 
   async index(endpoint: string, settings: IndexationSettings) {
     const response = await this.api.get(endpoint)

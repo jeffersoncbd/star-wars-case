@@ -1,6 +1,6 @@
 import { MapTheObject } from '../../entities/MapTheObject'
 import { IndexerService } from '../../entities/_services'
-import { IndexAnUnknownObject } from './UseCase'
+import { IndexAnUnknownObjectUseCase } from './UseCase'
 
 class IndexerStub implements IndexerService {
   async index(): Promise<void> {
@@ -11,7 +11,7 @@ class IndexerStub implements IndexerService {
 function makeSut() {
   const mapper = new MapTheObject()
   const indexerStub = new IndexerStub()
-  const sut = new IndexAnUnknownObject(mapper, indexerStub)
+  const sut = new IndexAnUnknownObjectUseCase(mapper, indexerStub)
   return { sut, mapper, indexerStub }
 }
 const anyObject = { id: 1, name: 'any', any: 'any' }
@@ -22,7 +22,7 @@ const fakeSettings = {
 }
 export const makeIndexAnUnknownObjectStub = () => makeSut().sut
 
-describe(IndexAnUnknownObject.name, () => {
+describe(IndexAnUnknownObjectUseCase.name, () => {
   test('deve mapear o objeto com as propriedades definidas', async () => {
     const { sut, mapper } = makeSut()
     const mapSpy = jest.spyOn(mapper, 'map')
