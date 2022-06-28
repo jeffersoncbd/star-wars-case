@@ -16,6 +16,9 @@ export class ApiAdapter implements ApiService {
   async get(endpoint: string): Promise<UnknownObject | UnknownObject[]> {
     const response = await swApi.get(endpoint)
     if (response.data.results === undefined) {
+      if (response.data.title) {
+        response.data.name = response.data.title
+      }
       response.data.id = response.data.url
       return response.data
     }
@@ -24,6 +27,9 @@ export class ApiAdapter implements ApiService {
       await this.callNextPage(endpoint, response.data.next)
     }
     return this.objects.map((object) => {
+      if (object.title) {
+        object.name = object.title
+      }
       object.id = object.url
       return object
     })
