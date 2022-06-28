@@ -5,10 +5,11 @@ import { adaptAnRequestHandlerFromControllerToIndexAnEndpoint } from './handlers
 
 const router = express.Router()
 
-router.get('/indices/:name/find-by/:match', async (request, response) => {
+router.get('/indices/:name/:query', async (request, response) => {
+  const { name, query } = request.params
   const openSearchResponse = await openSearchClient.search({
-    index: request.params.name,
-    body: { query: { match: { [request.params.match]: request.query } } }
+    index: name,
+    body: { query: { match: { name: { query } } } }
   })
 
   return response.json(openSearchResponse.body)
