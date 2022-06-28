@@ -5,10 +5,8 @@ export class ControllerToIndexAnEndpoint implements Controller {
   constructor(private indexer: IndexApiEndpointUseCase) {}
 
   async handle(httpRequest: HttpRequest): Promise<void | HttpResponse> {
-    const {
-      params: { index },
-      body: { endpoint, properties }
-    } = httpRequest
+    const { name: index } = httpRequest.params
+    const { endpoint, properties } = httpRequest.body
     await this.indexer.index(endpoint, { index, properties })
   }
 }

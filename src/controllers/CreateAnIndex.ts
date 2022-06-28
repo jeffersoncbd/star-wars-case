@@ -5,7 +5,7 @@ export class ControllerToCreateAnIndex implements Controller {
   constructor(private creator: IndiceCreatorUsecase) {}
 
   async handle(httpRequest: HttpRequest): Promise<void | HttpResponse> {
-    const { index } = httpRequest.params
+    const { index } = httpRequest.body
     await this.creator.create(index)
   }
 }
