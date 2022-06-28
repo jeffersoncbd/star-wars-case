@@ -6,7 +6,7 @@ import { MapTheObject } from '../../../_domain/entities/MapTheObject'
 import { IndexAnUnknownObjectUseCase } from '../../../_domain/usecases/IndexAnUnknownObject'
 import { IndexApiEndpointUseCase } from '../../../_domain/usecases/IndexApiEndpoint'
 
-export function adaptAnRequestHandlerFromControllerToIndexAnEndpoint(): RequestHandler {
+export function convertControllerToIndexAnEndpointInRequestHandler(): RequestHandler {
   const mapper = new MapTheObject()
   const apiAdapted = new ApiAdapter()
   const indexerAdapted = new IndexerAdapter()

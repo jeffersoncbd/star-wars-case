@@ -1,6 +1,6 @@
 import express from 'express'
 import { openSearchClient } from '../OpenSearch'
-import { adaptAnRequestHandlerFromControllerToIndexAnEndpoint } from './handlers/indexAnEndpoint'
+import { convertControllerToIndexAnEndpointInRequestHandler } from './handlers/indexAnEndpoint'
 
 const router = express.Router()
 
@@ -25,7 +25,7 @@ router.get('/indices', async (_, response) => {
 })
 router.post(
   '/indices/:name',
-  adaptAnRequestHandlerFromControllerToIndexAnEndpoint()
+  convertControllerToIndexAnEndpointInRequestHandler()
 )
 router.delete('/indices/:name', async (request, response) => {
   await openSearchClient.indices.delete({ index: request.params.name })
