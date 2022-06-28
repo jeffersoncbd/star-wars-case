@@ -1,3 +1,4 @@
+import { idExtractorFromSWapisURLs } from '../helpers/idExtractorFromSWapisURLs'
 import { openSearchClient } from '../services/OpenSearch'
 import {
   IndexedData,
@@ -12,9 +13,8 @@ export class IndexedDataSearchAdapter implements IndexedDataSearchService {
     const openSearchResponse = await openSearchClient.search({ index, body })
     const resultList = openSearchResponse.body.hits.hits.map(
       (document: any) => {
-        const urlParts = document._id.split('/')
         return {
-          id: urlParts[urlParts.length - 2],
+          id: idExtractorFromSWapisURLs(document._id),
           name: document._source.name,
           type: document._index
         }
