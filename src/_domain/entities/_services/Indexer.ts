@@ -1,7 +1,7 @@
 import { UnknownObject } from '../_protocols'
 
 export interface IndexerService {
-  index(index: string, data: UnknownObject): Promise<void>
+  index(data: UnknownObject, index: string, type?: string): Promise<void>
 }
 
 export interface IndexExistenceCheckService {

@@ -4,14 +4,18 @@ import { UnknownObject } from '../../entities/_protocols'
 
 export interface IndexationSettings {
   index: string
-  properties: string[]
+  type?: string
 }
 
 export class IndexAnUnknownObjectUseCase {
   constructor(private mapper: MapTheObject, private indexer: IndexerService) {}
 
-  async index(object: UnknownObject, settings: IndexationSettings) {
-    const mappedObject = this.mapper.map(object, settings.properties)
-    await this.indexer.index(settings.index, mappedObject)
+  async index(
+    object: UnknownObject,
+    properties: string[],
+    settings: IndexationSettings
+  ) {
+    const mappedObject = this.mapper.map(object, properties)
+    await this.indexer.index(mappedObject, settings.index, settings.type)
   }
 }

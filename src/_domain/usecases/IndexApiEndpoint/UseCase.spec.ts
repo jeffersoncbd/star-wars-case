@@ -18,23 +18,24 @@ function makeSut() {
   return { sut, apiStub, indexerStub }
 }
 const fakeSettings: IndexationSettings = {
-  index: 'index',
-  properties: ['any']
+  index: 'anyIndex',
+  type: 'anyType'
 }
+const fakeProperties = ['any']
 
 describe(IndexApiEndpointUseCase.name, () => {
   test('deve pegar os dados do endpoint informado', async () => {
     const { sut, apiStub } = makeSut()
     const getSpy = jest.spyOn(apiStub, 'get')
-    await sut.index('any', fakeSettings)
+    await sut.index('any', fakeProperties, fakeSettings)
     expect(getSpy).toHaveBeenCalledWith('any')
   })
 
   test('se o endpoint retornar um unico objeto, deve indexa-lo somente', async () => {
     const { sut, indexerStub } = makeSut()
     const indexSpy = jest.spyOn(indexerStub, 'index')
-    await sut.index('any', fakeSettings)
-    expect(indexSpy.mock.calls).toEqual([[{}, fakeSettings]])
+    await sut.index('any', fakeProperties, fakeSettings)
+    expect(indexSpy.mock.calls).toEqual([[{}, fakeProperties, fakeSettings]])
   })
 
   describe('se o endpoint retornar uma lista de objetos, deve indexar cada um:', () => {
@@ -44,11 +45,11 @@ describe(IndexApiEndpointUseCase.name, () => {
       jest
         .spyOn(apiStub, 'get')
         .mockImplementation(async () => [{ id: 1 }, { id: 2 }, { id: 3 }])
-      await sut.index('any', fakeSettings)
+      await sut.index('any', fakeProperties, fakeSettings)
       expect(indexSpy.mock.calls).toEqual([
-        [{ id: 1 }, fakeSettings],
-        [{ id: 2 }, fakeSettings],
-        [{ id: 3 }, fakeSettings]
+        [{ id: 1 }, fakeProperties, fakeSettings],
+        [{ id: 2 }, fakeProperties, fakeSettings],
+        [{ id: 3 }, fakeProperties, fakeSettings]
       ])
     })
 
@@ -58,10 +59,10 @@ describe(IndexApiEndpointUseCase.name, () => {
       jest
         .spyOn(apiStub, 'get')
         .mockImplementation(async () => [{ name: 'name1' }, { name: 'name2' }])
-      await sut.index('any', fakeSettings)
+      await sut.index('any', fakeProperties, fakeSettings)
       expect(indexSpy.mock.calls).toEqual([
-        [{ name: 'name1' }, fakeSettings],
-        [{ name: 'name2' }, fakeSettings]
+        [{ name: 'name1' }, fakeProperties, fakeSettings],
+        [{ name: 'name2' }, fakeProperties, fakeSettings]
       ])
     })
   })
