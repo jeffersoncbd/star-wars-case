@@ -1,12 +1,13 @@
 import { ErrorRequestHandler } from 'express'
 
-const errorTypes = ['ValidationError'] as const
+const errorTypes = ['ValidationError', 'ResponseError'] as const
 type ErrorTypes = typeof errorTypes[number]
 // eslint-disable-next-line no-unused-vars
 type Errors = { [key in ErrorTypes]: number }
 
 const expectedErrors: Errors = {
-  ValidationError: 400
+  ValidationError: 400,
+  ResponseError: 400
 }
 
 export const errorsHandler: ErrorRequestHandler = (
