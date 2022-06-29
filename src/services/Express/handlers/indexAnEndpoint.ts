@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express'
-import { ApiAdapter } from '../../../adapters/Api'
-import { IndexerAdapter } from '../../../adapters/Indexer'
+import { StarWarsApiAdapter } from '../../../adapters/StarWarsApi'
+import { IndexDataInOpenSearch } from '../../../adapters/OpenSearch'
 import { ControllerToIndexAnEndpoint } from '../../../controllers/IndexAnEndpoint'
 import { MapAnUnknownObject } from '../../../_domain/entities/MapAnUnknownObject'
 import { IndexAnUnknownObjectUseCase } from '../../../_domain/usecases/IndexAnUnknownObject'
@@ -8,17 +8,20 @@ import { IndexApiEndpointUseCase } from '../../../_domain/usecases/IndexApiEndpo
 
 export function convertControllerToIndexAnEndpointInRequestHandler(): RequestHandler {
   const mapper = new MapAnUnknownObject()
-  const apiAdapted = new ApiAdapter()
-  const indexerAdapted = new IndexerAdapter()
-  const indexerAnUnknownObject = new IndexAnUnknownObjectUseCase(
+  const swApi = new StarWarsApiAdapter()
+  const openSearchIndexer = new IndexDataInOpenSearch()
+
+  const unknownObjectIndexer = new IndexAnUnknownObjectUseCase(
     mapper,
-    indexerAdapted
+    openSearchIndexer
   )
-  const indexer = new IndexApiEndpointUseCase(
-    apiAdapted,
-    indexerAnUnknownObject
+
+  const indexerEndpoint = new IndexApiEndpointUseCase(
+    swApi,
+    unknownObjectIndexer
   )
-  const controller = new ControllerToIndexAnEndpoint(indexer)
+
+  const controller = new ControllerToIndexAnEndpoint(indexerEndpoint)
   return async (request, response) => {
     const controllerResponse = await controller.handle(request)
     return response.sendStatus(200).json(controllerResponse)

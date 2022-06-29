@@ -1,2 +1,2 @@
-export * from './Api'
-export * from './Indexer'
+export * from './StarWarsApi'
+export * from './IndexedData'

@@ -1,12 +1,14 @@
-import { idExtractorFromSWapisURLs } from '../helpers/idExtractorFromSWapisURLs'
-import { openSearchClient } from '../services/OpenSearch'
+import { idExtractorFromSWapisURLs } from '../../helpers/idExtractorFromSWapisURLs'
+import { openSearchClient } from '../../services/OpenSearch'
 import {
   IndexedData,
-  IndexedDataSearchService
-} from '../_domain/entities/_services'
+  ServiceToIndexedDataSearch
+} from '../../_domain/entities/_services'
 
-export class IndexedDataSearchAdapter implements IndexedDataSearchService {
-  async search(index: string, query: string): Promise<IndexedData> {
+export class IndexedDataSearchInOpenSearch
+  implements ServiceToIndexedDataSearch
+{
+  async search(index: string, query: string): Promise<IndexedData[]> {
     const body = {
       query: { query_string: { default_field: 'name', query: `*${query}*` } }
     }

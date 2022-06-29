@@ -1,10 +1,8 @@
 import { ValidationError } from '../_errors/Validation'
-import { UnknownObject } from '../_protocols'
-
-interface KnownObject extends UnknownObject {}
+import { KnownObject, UnknownObject } from '../_protocols'
 
 export class MapAnUnknownObject {
-  map(unknownObject: UnknownObject, propertiesToMap: string[]) {
+  map(unknownObject: UnknownObject, propertiesToMap: string[]): KnownObject {
     const mappedObject: KnownObject = {}
 
     propertiesToMap.forEach((property) => {

@@ -1,5 +1,5 @@
 import { UnknownObject } from '../_protocols'
 
-export interface ApiService {
+export interface StarWarsApiService {
   get(endpoint: string): Promise<UnknownObject[] | UnknownObject>
 }

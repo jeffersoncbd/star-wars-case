@@ -1,24 +1,20 @@
 import { MapAnUnknownObject } from '../../entities/MapAnUnknownObject'
-import { IndexerService } from '../../entities/_services'
+import { ServiceToIndexData } from '../../entities/_services'
 import { UnknownObject } from '../../entities/_protocols'
-
-export interface IndexationSettings {
-  index: string
-  type?: string
-}
 
 export class IndexAnUnknownObjectUseCase {
   constructor(
     private mapper: MapAnUnknownObject,
-    private indexer: IndexerService
+    private indexer: ServiceToIndexData
   ) {}
 
   async index(
-    object: UnknownObject,
-    properties: string[],
-    settings: IndexationSettings
+    unknownObject: UnknownObject,
+    propertiesToMap: string[],
+    index: string,
+    type?: string
   ) {
-    const mappedObject = this.mapper.map(object, properties)
-    await this.indexer.index(mappedObject, settings.index, settings.type)
+    const knownObject = this.mapper.map(unknownObject, propertiesToMap)
+    await this.indexer.index(knownObject, index, type)
   }
 }

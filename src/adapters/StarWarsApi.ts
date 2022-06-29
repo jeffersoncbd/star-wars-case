@@ -1,8 +1,8 @@
 import { swApi } from '../services/SWapi'
 import { UnknownObject } from '../_domain/entities/_protocols'
-import { ApiService } from '../_domain/entities/_services'
+import { StarWarsApiService } from '../_domain/entities/_services'
 
-export class ApiAdapter implements ApiService {
+export class StarWarsApiAdapter implements StarWarsApiService {
   private objects: UnknownObject[] = []
 
   private async callNextPage(endpoint: string, next: string): Promise<void> {
