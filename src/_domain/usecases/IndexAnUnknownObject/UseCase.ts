@@ -1,6 +1,6 @@
 import { MapAnUnknownObject } from '../../entities/MapAnUnknownObject'
 import { UnknownObject } from '../../entities/_protocols'
-import { IndexAKnownObject } from '../../entities/IndexAKnownObject/Entity'
+import { IndexAKnownObject } from '../../entities/IndexAKnownObject'
 
 export class IndexAnUnknownObjectUseCase {
   constructor(
