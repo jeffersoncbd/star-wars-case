@@ -3,7 +3,7 @@ import { KnownObject } from '../_protocols'
 export interface IndexedData {
   id: string
   name: string
-  type: string
+  type?: string
 }
 
 export interface ServiceToIndexData {
