@@ -6,7 +6,7 @@ export class ControllerToIndexedDataSearch implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<void | HttpResponse> {
     const { index, query } = httpRequest.params
-    const indexedData = await this.searcher.search(index, query)
+    const indexedData = await this.searcher.search(query, index)
     return { body: indexedData }
   }
 }
