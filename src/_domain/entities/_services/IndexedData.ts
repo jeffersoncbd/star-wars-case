@@ -11,7 +11,7 @@ export interface ServiceToIndexData {
 }
 
 export interface ServiceToGetDataIndexedById {
-  get(id: string, index: string): Promise<IndexedData>
+  getById(id: string, index: string): Promise<IndexedData>
 }
 
 export interface ServiceToIndexedDataSearch {
