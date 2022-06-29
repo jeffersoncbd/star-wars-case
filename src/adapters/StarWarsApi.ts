@@ -1,9 +1,11 @@
 import { swApi } from '../services/SWapi'
+import { ExtractIdFromSWApiURLs } from '../_domain/entities/ExtractIdFromSWApiURLs'
 import { UnknownObject } from '../_domain/entities/_protocols'
 import { StarWarsApiService } from '../_domain/entities/_services'
 
 export class StarWarsApiAdapter implements StarWarsApiService {
   private objects: UnknownObject[] = []
+  private idExtractor = new ExtractIdFromSWApiURLs()
 
   private async callNextPage(endpoint: string, next: string): Promise<void> {
     const response = await swApi.get(`${endpoint}?${next.split('?')[1]}`)
@@ -19,7 +21,7 @@ export class StarWarsApiAdapter implements StarWarsApiService {
       if (response.data.title) {
         response.data.name = response.data.title
       }
-      response.data.id = response.data.url
+      response.data.id = this.idExtractor.extract(response.data.url)
       return response.data
     }
     this.objects = this.objects.concat(response.data.results)
@@ -30,7 +32,7 @@ export class StarWarsApiAdapter implements StarWarsApiService {
       if (object.title) {
         object.name = object.title
       }
-      object.id = object.url
+      object.id = this.idExtractor.extract(object.url as string)
       return object
     })
   }
