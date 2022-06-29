@@ -1,11 +1,11 @@
 import { MapAnUnknownObject } from '../../entities/MapAnUnknownObject'
-import { ServiceToIndexData } from '../../entities/_services'
 import { UnknownObject } from '../../entities/_protocols'
+import { IndexAKnownObject } from '../../entities/IndexAKnownObject/Entity'
 
 export class IndexAnUnknownObjectUseCase {
   constructor(
     private mapper: MapAnUnknownObject,
-    private indexer: ServiceToIndexData
+    private indexer: IndexAKnownObject
   ) {}
 
   async index(
