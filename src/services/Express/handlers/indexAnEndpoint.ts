@@ -2,12 +2,12 @@ import { RequestHandler } from 'express'
 import { ApiAdapter } from '../../../adapters/Api'
 import { IndexerAdapter } from '../../../adapters/Indexer'
 import { ControllerToIndexAnEndpoint } from '../../../controllers/IndexAnEndpoint'
-import { MapTheObject } from '../../../_domain/entities/MapTheObject'
+import { MapAnUnknownObject } from '../../../_domain/entities/MapAnUnknownObject'
 import { IndexAnUnknownObjectUseCase } from '../../../_domain/usecases/IndexAnUnknownObject'
 import { IndexApiEndpointUseCase } from '../../../_domain/usecases/IndexApiEndpoint'
 
 export function convertControllerToIndexAnEndpointInRequestHandler(): RequestHandler {
-  const mapper = new MapTheObject()
+  const mapper = new MapAnUnknownObject()
   const apiAdapted = new ApiAdapter()
   const indexerAdapted = new IndexerAdapter()
   const indexerAnUnknownObject = new IndexAnUnknownObjectUseCase(

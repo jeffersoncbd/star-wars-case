@@ -1,4 +1,4 @@
-import { MapTheObject } from '../../entities/MapTheObject'
+import { MapAnUnknownObject } from '../../entities/MapAnUnknownObject'
 import { IndexerService } from '../../entities/_services'
 import { IndexAnUnknownObjectUseCase } from './UseCase'
 
@@ -9,7 +9,7 @@ class IndexerStub implements IndexerService {
 }
 
 function makeSut() {
-  const mapper = new MapTheObject()
+  const mapper = new MapAnUnknownObject()
   const indexerStub = new IndexerStub()
   const sut = new IndexAnUnknownObjectUseCase(mapper, indexerStub)
   return { sut, mapper, indexerStub }

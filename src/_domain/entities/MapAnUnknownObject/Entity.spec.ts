@@ -1,5 +1,5 @@
 import { ValidationError } from '../_errors/Validation'
-import { MapTheObject } from './Entity'
+import { MapAnUnknownObject } from './Entity'
 
 const anyObject = {
   id: 1,
@@ -10,9 +10,9 @@ const anyObject = {
   anotherField: 'another'
 }
 
-describe(MapTheObject.name, () => {
+describe(MapAnUnknownObject.name, () => {
   test('deve mapear os dados de acordo com a lista de propriedades', () => {
-    const sut = new MapTheObject()
+    const sut = new MapAnUnknownObject()
 
     const data1 = sut.map(anyObject, ['age'])
     expect(data1).toEqual({ age: 999 })
@@ -25,11 +25,11 @@ describe(MapTheObject.name, () => {
   })
 
   test('deve lançar erro de validação caso não exista a propriedade informada no objeto', () => {
-    const sut = new MapTheObject()
+    const sut = new MapAnUnknownObject()
     const callSut = () => sut.map(anyObject, ['non-existentProperty'])
     expect(callSut).toThrow(ValidationError)
     expect(callSut).toThrowError(
-      'A propriedade "non-existentProperty" não existe'
+      'Propriedade "non-existentProperty" não encontrada'
     )
   })
 })

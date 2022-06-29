@@ -1,4 +1,4 @@
-import { MapTheObject } from '../../entities/MapTheObject'
+import { MapAnUnknownObject } from '../../entities/MapAnUnknownObject'
 import { IndexerService } from '../../entities/_services'
 import { UnknownObject } from '../../entities/_protocols'
 
@@ -8,7 +8,10 @@ export interface IndexationSettings {
 }
 
 export class IndexAnUnknownObjectUseCase {
-  constructor(private mapper: MapTheObject, private indexer: IndexerService) {}
+  constructor(
+    private mapper: MapAnUnknownObject,
+    private indexer: IndexerService
+  ) {}
 
   async index(
     object: UnknownObject,
