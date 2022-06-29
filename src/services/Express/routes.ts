@@ -2,12 +2,17 @@ import express from 'express'
 import { openSearchClient } from '../OpenSearch'
 import { convertControllerToIndexedDataSearchInRequestHandler } from './handlers/indexedDataSearch'
 import { convertControllerToIndexAnEndpointInRequestHandler } from './handlers/indexAnEndpoint'
+import { convertControllerOfResourcesInAnExpressRequestHandler } from './handlers/resources'
 
 const router = express.Router()
 
 router.get(
   '/find/:index/:query',
   convertControllerToIndexedDataSearchInRequestHandler()
+)
+router.get(
+  '/:resource/:id',
+  convertControllerOfResourcesInAnExpressRequestHandler()
 )
 
 router.get('/indices', async (_, response) => {
