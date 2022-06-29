@@ -8,11 +8,12 @@ export class IndexDataInOpenSearch implements ServiceToIndexData {
     index: string,
     type?: string
   ): Promise<void> {
-    const { id, ...body } = object
-    await openSearchClient.index({
-      id: id as string,
+    const document = {
+      id: object.id as string,
       index,
-      body: { ...body, type }
-    })
+      body: { ...object, type }
+    }
+
+    await openSearchClient.index(document)
   }
 }
