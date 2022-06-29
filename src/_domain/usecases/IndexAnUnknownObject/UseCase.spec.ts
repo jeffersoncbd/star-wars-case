@@ -1,13 +1,13 @@
 import { makeIndexAKnownObjectStub } from '../../entities/IndexAKnownObject/Entity.spec'
 import { MapAnUnknownObject } from '../../entities/MapAnUnknownObject'
-import { IndexAnUnknownObjectUseCase } from './UseCase'
+import { UseCaseToIndexAnUnknownObject } from './UseCase'
 
 function makeSut() {
   const mapper = new MapAnUnknownObject()
   const indexer = makeIndexAKnownObjectStub()
   jest.spyOn(mapper, 'map').mockImplementation(() => ({}))
   jest.spyOn(indexer, 'index').mockImplementation(async () => undefined)
-  const sut = new IndexAnUnknownObjectUseCase(mapper, indexer)
+  const sut = new UseCaseToIndexAnUnknownObject(mapper, indexer)
   return { sut, mapper, indexer }
 }
 const anyObject = { id: 1, name: 'any', any: 'any' }
@@ -17,7 +17,7 @@ const fakeType = 'anyType'
 
 export const makeIndexAnUnknownObjectStub = () => makeSut().sut
 
-describe(IndexAnUnknownObjectUseCase.name, () => {
+describe(UseCaseToIndexAnUnknownObject.name, () => {
   test('deve mapear o objeto recebido com as propriedades informadas', async () => {
     const { sut, mapper } = makeSut()
     const mapSpy = jest.spyOn(mapper, 'map')

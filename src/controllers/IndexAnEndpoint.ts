@@ -1,8 +1,8 @@
-import { IndexApiEndpointUseCase } from '../_domain/usecases/IndexApiEndpoint'
+import { UseCaseToIndexAnApiEndpoint } from '../_domain/usecases/IndexAnApiEndpoint'
 import { Controller, HttpRequest, HttpResponse } from './protocol'
 
 export class ControllerToIndexAnEndpoint implements Controller {
-  constructor(private indexer: IndexApiEndpointUseCase) {}
+  constructor(private indexer: UseCaseToIndexAnApiEndpoint) {}
 
   async handle(httpRequest: HttpRequest): Promise<void | HttpResponse> {
     const { name: index } = httpRequest.params

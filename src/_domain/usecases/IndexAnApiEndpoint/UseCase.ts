@@ -1,10 +1,10 @@
 import { StarWarsApiService } from '../../entities/_services'
-import { IndexAnUnknownObjectUseCase } from '../IndexAnUnknownObject'
+import { UseCaseToIndexAnUnknownObject } from '../IndexAnUnknownObject'
 
-export class IndexApiEndpointUseCase {
+export class UseCaseToIndexAnApiEndpoint {
   constructor(
     private swApi: StarWarsApiService,
-    private indexer: IndexAnUnknownObjectUseCase
+    private indexer: UseCaseToIndexAnUnknownObject
   ) {}
 
   async index(

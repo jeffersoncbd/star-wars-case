@@ -1,7 +1,7 @@
 import { StarWarsApiService } from '../../entities/_services'
 import { UnknownObject } from '../../entities/_protocols'
 import { makeIndexAnUnknownObjectStub } from '../IndexAnUnknownObject/UseCase.spec'
-import { IndexApiEndpointUseCase } from './UseCase'
+import { UseCaseToIndexAnApiEndpoint } from './UseCase'
 
 class StarWarsApiStub implements StarWarsApiService {
   async get(): Promise<UnknownObject | UnknownObject[]> {
@@ -13,7 +13,7 @@ function makeSut() {
   const swApiStub = new StarWarsApiStub()
   const indexerStub = makeIndexAnUnknownObjectStub()
   jest.spyOn(indexerStub, 'index').mockImplementation(async () => undefined)
-  const sut = new IndexApiEndpointUseCase(swApiStub, indexerStub)
+  const sut = new UseCaseToIndexAnApiEndpoint(swApiStub, indexerStub)
   return { sut, swApiStub, indexerStub }
 }
 const fakeEndpoint = '/anyEndpoint'
@@ -21,7 +21,7 @@ const fakeProperties = ['any']
 const fakeIndex = 'anyIndex'
 const fakeType = 'anyType'
 
-describe(IndexApiEndpointUseCase.name, () => {
+describe(UseCaseToIndexAnApiEndpoint.name, () => {
   test('deve buscar os dados no endpoint informado', async () => {
     const { sut, swApiStub } = makeSut()
     const getSpy = jest.spyOn(swApiStub, 'get')
