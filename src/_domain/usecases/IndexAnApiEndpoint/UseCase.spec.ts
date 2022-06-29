@@ -3,7 +3,7 @@ import { UnknownObject } from '../../entities/_protocols'
 import { makeIndexAnUnknownObjectStub } from '../IndexAnUnknownObject/UseCase.spec'
 import { UseCaseToIndexAnApiEndpoint } from './UseCase'
 
-class StarWarsApiStub implements StarWarsApiService {
+export class StarWarsApiStub implements StarWarsApiService {
   async get(): Promise<UnknownObject | UnknownObject[]> {
     return {}
   }
