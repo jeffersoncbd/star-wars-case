@@ -3,20 +3,22 @@ import { StarWarsApiAdapter } from '../../../adapters/StarWarsApi'
 import { IndexDataInOpenSearch } from '../../../adapters/OpenSearch'
 import { ControllerToIndexAnEndpoint } from '../../../controllers/IndexAnEndpoint'
 import { MapAnUnknownObject } from '../../../_domain/entities/MapAnUnknownObject'
-import { IndexAnUnknownObjectUseCase } from '../../../_domain/usecases/IndexAnUnknownObject'
-import { IndexApiEndpointUseCase } from '../../../_domain/usecases/IndexApiEndpoint'
+import { UseCaseToIndexAnUnknownObject } from '../../../_domain/usecases/IndexAnUnknownObject'
+import { UseCaseToIndexAnApiEndpoint } from '../../../_domain/usecases/IndexAnApiEndpoint'
+import { IndexAKnownObject } from '../../../_domain/entities/IndexAKnownObject'
 
 export function convertControllerToIndexAnEndpointInRequestHandler(): RequestHandler {
   const mapper = new MapAnUnknownObject()
   const swApi = new StarWarsApiAdapter()
   const openSearchIndexer = new IndexDataInOpenSearch()
 
-  const unknownObjectIndexer = new IndexAnUnknownObjectUseCase(
+  const indexer = new IndexAKnownObject(openSearchIndexer)
+  const unknownObjectIndexer = new UseCaseToIndexAnUnknownObject(
     mapper,
-    openSearchIndexer
+    indexer
   )
 
-  const indexerEndpoint = new IndexApiEndpointUseCase(
+  const indexerEndpoint = new UseCaseToIndexAnApiEndpoint(
     swApi,
     unknownObjectIndexer
   )
