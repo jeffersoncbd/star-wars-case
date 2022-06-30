@@ -8,6 +8,7 @@ import { ExtractResourceFromSWApiURLs } from '../../../_domain/entities/ExtractR
 import { ExtractIdFromSWApiURLs } from '../../../_domain/entities/ExtractIdFromSWApiURLs'
 import { GetDataIndexedByIdInOpenSearch } from '../../../adapters/OpenSearch/GetDataIndexedById'
 import { GetDataIndexedById } from '../../../_domain/entities/GetDataIndexedById'
+import { UseCaseForSuggestions } from '../../../_domain/usecases/Suggestions'
 
 export function convertControllerOfResourcesInAnExpressRequestHandler(): RequestHandler {
   const swApi = new StarWarsApiAdapter()
@@ -21,7 +22,12 @@ export function convertControllerOfResourcesInAnExpressRequestHandler(): Request
     idExtractor,
     indexer
   )
-  const fullData = new UseCaseToGetTheFullDataOfAnId(swApi, subData)
+  const suggestions = new UseCaseForSuggestions(swApi, subData)
+  const fullData = new UseCaseToGetTheFullDataOfAnId(
+    swApi,
+    subData,
+    suggestions
+  )
   const controller = new ControllerOfResources(fullData)
   return async (request, response) => {
     const controllerResponse = await controller.handle(request)

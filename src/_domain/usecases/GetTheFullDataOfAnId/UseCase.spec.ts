@@ -1,11 +1,18 @@
 import { makeGetSubdataFromAnUrlStub } from '../GetSubDataFromAnUrl/stubs'
 import { StarWarsApiStub } from '../IndexAnApiEndpoint/UseCase.spec'
+import { UseCaseForSuggestions } from '../Suggestions'
 import { UseCaseToGetTheFullDataOfAnId } from './UseCase'
 
 function makeSut() {
   const swApiStub = new StarWarsApiStub()
   const subDataStub = makeGetSubdataFromAnUrlStub()
-  const sut = new UseCaseToGetTheFullDataOfAnId(swApiStub, subDataStub)
+  const suggestions = new UseCaseForSuggestions(swApiStub, subDataStub)
+  jest.spyOn(suggestions, 'sugest').mockImplementation(async () => [])
+  const sut = new UseCaseToGetTheFullDataOfAnId(
+    swApiStub,
+    subDataStub,
+    suggestions
+  )
   return { sut, swApiStub, subDataStub }
 }
 const fakeResource = 'anyResource'
