@@ -1,5 +1,6 @@
 /node_modules
 /__tests__/coverage
+/dist
 
 .env
 yarn-error.log
