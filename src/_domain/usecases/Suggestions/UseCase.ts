@@ -26,8 +26,12 @@ export class UseCaseForSuggestions {
     const suggestions: any[] = []
     for (let base of basesForSuggestions) {
       if (Array.isArray(base)) {
-        // escolhe um dos elementos da lista como base
+        // escolhe randomicamente um dos elementos da lista como base
         base = base[this.getRandomIndex(base.length)]
+      }
+      // neste caso expecifico não faz sentido sugestão pois retornará sempre o planeta já buscado
+      if (mainResourceType === 'planets' && base.type === 'people') {
+        continue
       }
       // busca os dados completos da base de sugestão
       const resource: any = await this.swApi.get(`/${base.type}/${base.id}`)
@@ -43,7 +47,7 @@ export class UseCaseForSuggestions {
       possibleSuggestions = possibleSuggestions.filter(
         (url: any) => !url.includes(`/${mainResourceId}/`)
       )
-      // algumas sugestões acabam ficando sem itens após as diversas limpesas
+      // algumas sugestões acabam ficando sem itens após as diversas limpezas
       if (possibleSuggestions.length > 0) {
         const suggestionUrl =
           possibleSuggestions[this.getRandomIndex(possibleSuggestions.length)]
