@@ -6,7 +6,8 @@ export class UseCaseForSuggestions {
     planets: 'residents',
     films: 'characters',
     vehicles: 'pilots',
-    starships: 'pilots'
+    starships: 'pilots',
+    species: 'people'
   }
 
   constructor(
@@ -29,8 +30,11 @@ export class UseCaseForSuggestions {
         // escolhe randomicamente um dos elementos da lista como base
         base = base[this.getRandomIndex(base.length)]
       }
-      // neste caso expecifico não faz sentido sugestão pois retornará sempre o planeta já buscado
-      if (mainResourceType === 'planets' && base.type === 'people') {
+      // esses casos não fazem sentido sugestão
+      if (
+        (mainResourceType === 'planets' && base.type === 'people') ||
+        (mainResourceType === 'species' && base.type === 'planets')
+      ) {
         continue
       }
       // busca os dados completos da base de sugestão
@@ -43,10 +47,16 @@ export class UseCaseForSuggestions {
         possibleSuggestions =
           resource[this.specificKeysForPeople[base.type as string]]
       }
+
       // remove o próprio ID como sugestão (para que não apareça o proprio recurso como sugerido)
-      possibleSuggestions = possibleSuggestions.filter(
-        (url: any) => !url.includes(`/${mainResourceId}/`)
-      )
+      try {
+        possibleSuggestions = possibleSuggestions.filter(
+          (url: any) => !url.includes(`/${mainResourceId}/`)
+        )
+      } catch (error) {
+        console.log('\n\n', resource, base, error, '\n\n')
+      }
+
       // algumas sugestões acabam ficando sem itens após as diversas limpezas
       if (possibleSuggestions.length > 0) {
         const suggestionUrl =
