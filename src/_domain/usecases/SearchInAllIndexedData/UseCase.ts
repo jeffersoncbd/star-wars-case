@@ -1,5 +1,4 @@
 import { SearchAnIndexedDatas } from '../../entities/SearchAnIndexedDatas'
-import { ValidationError } from '../../entities/_errors/Validation'
 import { IndexedData } from '../../entities/_services'
 
 export class UseCaseForSearchInAllIndexedData {
@@ -15,10 +14,6 @@ export class UseCaseForSearchInAllIndexedData {
   constructor(private searcher: SearchAnIndexedDatas) {}
 
   async search(query: string) {
-    if (query.length <= 3) {
-      throw new ValidationError('Termo de pesquisa muito curto.')
-    }
-
     let data: IndexedData[] = []
 
     for (const indice of this.indices) {
